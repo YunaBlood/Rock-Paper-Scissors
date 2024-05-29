@@ -37,17 +37,14 @@ function GetHumanChoice(){
     //     alert("Please input one of the three choice")
     //     return}
     if(userChoice === null || userChoice === "" || userChoice === undefined){
-        alert("Please input one of the three choice")
-        return
+        alert("Please input one of the three choice");
+        return;
     }
     //Show the result of UserChoice in the console 
     // console.log(userChoice)
     //return the variable userChoice
-    return userChoice
+    return userChoice;
 }
-
-//Call function
-// GetHumanChoice()
 
 
 // Steps 3 : Declare player score
@@ -56,6 +53,26 @@ function GetHumanChoice(){
 let humanScore = 0;
 // Create global scope variable ComputerScore score and initialize value to 0
 let computerScore = 0;
+
+// Steps 5 : Write the logic to play the entire game
+
+//Create function PlayGame
+function PlayGame(round = 1){
+
+
+
+
+    //Check if the round is more than 5 and show the message if you win or lose 
+    if(round > 5){
+        if(humanScore > computerScore){
+            console.log("Human score" ,humanScore, "Computer Score", computerScore, "You win !")
+        }else if(computerScore > humanScore){
+            console.log("Human score" ,humanScore, "Computer Score", computerScore, "Computer win !")
+        }else{
+            console.log("Human score" ,humanScore, "Computer Score",computerScore, "It's a draw")
+        }
+        return
+    }
 
 
 
@@ -101,17 +118,22 @@ function PlayRound(humanChoice, computerChoice){
         console.log("It's a Draw")
     }
 
-    console.log("Human score:", humanScore);
-    console.log("Computer score:",computerScore);
-
     // return the value of human choice and computer choice
     return humanChoice && computerChoice;
 }
 
-//Create constance humanSelection that will have the value the function getHumanChoice
-const humanSelection = GetHumanChoice();
-// Create constance humanSelection that will have the value the function getComputerChoice
-const computerSelection = GetComputerChoice();
+    // Call the function GetComputerChoice to replay a round
+    const humanSelection = GetHumanChoice();
+    // Call the function GetComputerChoice to replay a round
+    const computerSelection = GetComputerChoice();
+    //Play the round and update the score
+    PlayRound(humanSelection,computerSelection);
+    // Call playGame for the next round
+    PlayGame(round + 1);
 
-//Call the function with two argument humanSelection, computerSelection
-PlayRound(humanSelection, computerSelection);
+
+}
+
+// Start the game with the first round
+PlayGame(1);
+
