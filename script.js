@@ -1,5 +1,7 @@
-// Create function GetComputerChoice
-function GetComputerChoice(){
+//Steps 1 : Computer Choice
+
+    // Create function GetComputerChoice
+    function GetComputerChoice(){
     // Create variable computerChoice
     let computerChoice;
     // Take the floor value of the random number
@@ -21,5 +23,24 @@ function GetComputerChoice(){
     // return random choice
     return computerChoice
 }
-// Call the function 
-GetComputerChoice()
+    // Call the function 
+    GetComputerChoice()
+
+//Steps 2 : Human Choice
+
+//Create function GetHumanChoice
+function GetHumanChoice(){
+    //Create variable userChoice with prompt that ask the user it's choice between the 3
+    let userChoice = prompt("Paper,Scissors,Rock", "Paper")
+    //if userChoice is not "rock" "paper" or "scissors" then alert("Please input one of the three choice") and return to stop the function
+    if(!(userChoice === "rock" || userChoice === "paper" || userChoice === "scissors" || userChoice === "Rock" || userChoice === "Paper" || userChoice === "Scissors")){
+        alert("Please input one of the three choice")
+        return}
+    //Show the result of UserChoice in the console 
+    console.log(userChoice)
+    //return the variable userChoice
+    return userChoice
+}
+
+//Call function
+GetHumanChoice()
