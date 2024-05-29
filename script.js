@@ -19,28 +19,99 @@
         computerChoice = "Scissors";
     }
     // Show on the console the choice
-    console.log(computerChoice)
+    // console.log(computerChoice)
     // return random choice
     return computerChoice
 }
     // Call the function 
-    GetComputerChoice()
+    // GetComputerChoice()
 
 //Steps 2 : Human Choice
 
 //Create function GetHumanChoice
 function GetHumanChoice(){
     //Create variable userChoice with prompt that ask the user it's choice between the 3
-    let userChoice = prompt("Paper,Scissors,Rock", "Paper")
+    let userChoice = prompt("Rock, Paper, Scissors", "Paper")
     //if userChoice is not "rock" "paper" or "scissors" then alert("Please input one of the three choice") and return to stop the function
-    if(!(userChoice === "rock" || userChoice === "paper" || userChoice === "scissors" || userChoice === "Rock" || userChoice === "Paper" || userChoice === "Scissors")){
+    // if(!(userChoice === "rock" || userChoice === "paper" || userChoice === "scissors" || userChoice === "scissor")){
+    //     alert("Please input one of the three choice")
+    //     return}
+    if(userChoice === null || userChoice === "" || userChoice === undefined){
         alert("Please input one of the three choice")
-        return}
+        return
+    }
     //Show the result of UserChoice in the console 
-    console.log(userChoice)
+    // console.log(userChoice)
     //return the variable userChoice
     return userChoice
 }
 
 //Call function
-GetHumanChoice()
+// GetHumanChoice()
+
+
+// Steps 3 : Declare player score
+
+//Create global scope variable HumanScore and initialize value to 0
+let humanScore = 0;
+// Create global scope variable ComputerScore score and initialize value to 0
+let computerScore = 0;
+
+
+
+// Steps 4 : Logic to play a single round
+
+//Create function PlayRound
+//Define two parameters for PlayRound humanChoice and computerChoice
+function PlayRound(humanChoice, computerChoice){
+    //HumanChoice need to be case insensitive example "RoCk", "RocK", ROCK, "rock"
+    humanChoice = humanChoice.toLowerCase();
+    //Show the result of human choice into the console
+    console.log("Human choice:",humanChoice);
+    //Computer choice result become lowercase
+    computerChoice = computerChoice.toLowerCase();
+    // Show the result of Computer Choice in the console.
+    console.log("Computer choice:",computerChoice)
+    //If human Choice === Paper && Computer choice === Scissor then increment computerScore by 1 and console.log the You lose Scissor beat paper
+    if(humanChoice === "paper" && computerChoice === "scissors" || computerChoice === "scissor"){
+        ++computerScore;
+        console.log("You lose, Scissors beat Paper");
+    //Else if ComputerChoice beat HumanChoice increment ComputerScore by 1 and show the message
+    }else if(humanChoice === "rock" && computerChoice === "paper"){
+        ++computerScore;
+        console.log("You lose, Paper beat Rock");
+    //Else if ComputerChoice beat HumanChoice increment ComputerScore by 1 and show the message
+    }else if(humanChoice === "scissors" || humanChoice === "scissor" && computerChoice === "rock"){
+        ++computerScore;
+        console.log("You lose, Rock beat Scissor");
+    //Else if human choice beat computerChoice increment humanScore by 1 and show the message
+    }else if (humanChoice === "paper" && computerChoice === "rock"){
+        ++humanScore;
+        console.log("You win ! Paper beat Rock");
+    //Else if human choice beat computerChoice increment humanScore by 1 and show the message
+    }else if (humanChoice === "scissors" || humanChoice === "scissor" && computerChoice === "paper"){
+        ++humanScore;
+        console.log("You win ! Scissor beat Paper");
+    //Else if human choice beat computerChoice increment humanScore by 1 and show the message
+    }else if (humanChoice === "rock" && computerChoice === "scissors" || computerChoice === "scissor"){
+        ++humanScore;
+        console.log("You win ! Rock beat Scissor")
+    // Else if humanChoice is equal at computerChoice show the message
+    }else if(humanChoice === computerChoice){
+        console.log("It's a Draw")
+    }
+
+    console.log("Human score:", humanScore);
+    console.log("Computer score:",computerScore);
+
+    // return the value of human choice and computer choice
+    return humanChoice && computerChoice;
+}
+
+//Create constance humanSelection that will have the value the function getHumanChoice
+const humanSelection = GetHumanChoice();
+// Create constance humanSelection that will have the value the function getComputerChoice
+const computerSelection = GetComputerChoice();
+
+//Call the function with two argument humanSelection, computerSelection
+PlayRound(humanSelection, computerSelection);
