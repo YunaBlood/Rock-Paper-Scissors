@@ -31,17 +31,19 @@
 //Create function GetHumanChoice
 function GetHumanChoice(){
     //Create variable userChoice with prompt that ask the user it's choice between the 3
-    let userChoice = prompt("Rock, Paper, Scissors", "Paper")
-    //if userChoice is not "rock" "paper" or "scissors" then alert("Please input one of the three choice") and return to stop the function
-    // if(!(userChoice === "rock" || userChoice === "paper" || userChoice === "scissors" || userChoice === "scissor")){
-    //     alert("Please input one of the three choice")
-    //     return}
-    if(userChoice === null || userChoice === "" || userChoice === undefined){
-        alert("Please input one of the three choice");
-        return;
+    let userChoice = prompt("Rock, Paper, Scissors", "Rock")
+
+    //if userChoice value is undefined null or empty string then return function and reprompt the user for choice
+    if(userChoice === undefined || userChoice === null || userChoice === ""){
+        alert("Please input one the three choice : Rock, Paper, Scissors ")
+        return GetHumanChoice();
     }
-    //Show the result of UserChoice in the console 
-    // console.log(userChoice)
+    //if userChoice is not "rock" "paper" or "scissors" then alert("Please input one of the three choice") and return and recall the function to restart the choice
+    if(!(userChoice.toLowerCase() === "rock" || userChoice.toLowerCase() === "paper" || userChoice.toLowerCase() === "scissors")) {
+        alert("Please input one of the three choice : Rock, Paper, Scissors ");
+        return GetHumanChoice();
+    }
+        
     //return the variable userChoice
     return userChoice;
 }
@@ -90,7 +92,7 @@ function PlayRound(humanChoice, computerChoice){
     // Show the result of Computer Choice in the console.
     console.log("Computer choice:",computerChoice)
     //If humanChoice choose different of ComputerChoice then in function of the choice loose or win the round and increment or decrement the score of the winner and show the log on the console
-    if(humanChoice === "paper" && computerChoice === "scissors" || humanChoice === "rock" && computerChoice === "paper" || humanChoice === "scissor" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice ==="rock"){
+    if(humanChoice === "paper" && computerChoice === "scissors" || humanChoice === "rock" && computerChoice === "paper" || humanChoice === "scissors" && computerChoice === "rock"){
         ++computerScore;
         console.log(`You lose, ${computerChoice} beat ${humanChoice}`);
     }else if(humanChoice === computerChoice){
