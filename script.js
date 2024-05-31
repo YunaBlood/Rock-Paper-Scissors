@@ -89,33 +89,15 @@ function PlayRound(humanChoice, computerChoice){
     computerChoice = computerChoice.toLowerCase();
     // Show the result of Computer Choice in the console.
     console.log("Computer choice:",computerChoice)
-    //If human Choice === Paper && Computer choice === Scissor then increment computerScore by 1 and console.log the You lose Scissor beat paper
-    if(humanChoice === "paper" && computerChoice === "scissors" || computerChoice === "scissor"){
+    //If humanChoice choose different of ComputerChoice then in function of the choice loose or win the round and increment or decrement the score of the winner and show the log on the console
+    if(humanChoice === "paper" && computerChoice === "scissors" || humanChoice === "rock" && computerChoice === "paper" || humanChoice === "scissor" && computerChoice === "rock" || humanChoice === "scissors" && computerChoice ==="rock"){
         ++computerScore;
-        console.log("You lose, Scissors beat Paper");
-    //Else if ComputerChoice beat HumanChoice increment ComputerScore by 1 and show the message
-    }else if(humanChoice === "rock" && computerChoice === "paper"){
-        ++computerScore;
-        console.log("You lose, Paper beat Rock");
-    //Else if ComputerChoice beat HumanChoice increment ComputerScore by 1 and show the message
-    }else if(humanChoice === "scissors" || humanChoice === "scissor" && computerChoice === "rock"){
-        ++computerScore;
-        console.log("You lose, Rock beat Scissor");
-    //Else if human choice beat computerChoice increment humanScore by 1 and show the message
-    }else if (humanChoice === "paper" && computerChoice === "rock"){
-        ++humanScore;
-        console.log("You win ! Paper beat Rock");
-    //Else if human choice beat computerChoice increment humanScore by 1 and show the message
-    }else if (humanChoice === "scissors" || humanChoice === "scissor" && computerChoice === "paper"){
-        ++humanScore;
-        console.log("You win ! Scissor beat Paper");
-    //Else if human choice beat computerChoice increment humanScore by 1 and show the message
-    }else if (humanChoice === "rock" && computerChoice === "scissors" || computerChoice === "scissor"){
-        ++humanScore;
-        console.log("You win ! Rock beat Scissor")
-    // Else if humanChoice is equal at computerChoice show the message
+        console.log(`You lose, ${computerChoice} beat ${humanChoice}`);
     }else if(humanChoice === computerChoice){
-        console.log("It's a Draw")
+        console.log(`It's a draw you both choose ${humanChoice, computerChoice}`);
+    }else{
+        ++humanScore;
+        console.log(`You win ! ${humanChoice} beat ${computerChoice}`);
     }
 
     // return the value of human choice and computer choice
