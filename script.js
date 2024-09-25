@@ -18,8 +18,6 @@
     }else {
         computerChoice = "Scissors";
     }
-    // Show on the console the choice
-    // console.log(computerChoice)
     // return random choice
     return computerChoice
 }
@@ -33,65 +31,79 @@ let humanScore = 0;
 // Create global scope variable ComputerScore score and initialize value to 0
 let computerScore = 0;
 
+function PlayRound(humanChoice, computerChoice){
+    
+    const computerSelection = GetComputerChoice();
+    let resultMessage
+
+    const gameResult = document.querySelector(".game-result")
+    
+    if(humanChoice === "Paper" && computerSelection === "Scissors" || humanChoice === "Rock" && computerSelection === "Paper" || humanChoice === "Scissors" && computerSelection === "Rock"){
+        ++computerScore;
+        console.log("Scores before increment:", "computer:",computerScore,"human", humanScore);
+        resultMessage = (`You lose, ${computerSelection} beat ${humanChoice}`);
+    }else if(humanChoice === computerSelection){
+        resultMessage = (`It's a draw you both choose ${humanChoice, computerSelection}`);
+    }else{
+        ++humanScore;
+        console.log("Scores before increment:", "computer:",computerScore,"human", humanScore);
+        resultMessage = (`You win ! ${humanChoice} beat ${computerSelection}`);
+    }
+
+    //Update the display with the message and score
+    gameResult.textContent = `${resultMessage}`
+
+    const gameHumanScore = document.querySelector(".human-score")
+    const gameComputerScore = document.querySelector(".computer-score")
+
+    gameHumanScore.textContent =`Human score: ${humanScore}`
+    gameComputerScore.textContent =`computerScore: ${computerScore}`
+    
+    // return the value of human choice and computer choice
+    return humanChoice && computerChoice;
+}
 // Steps 5 : Write the logic to play the entire game
 
 //Create function PlayGame
 function PlayGame(round = 1){
-
-    //Check if the round is more than 5 and show the message if you win or lose 
+    
+    
+    
+    const FinalScore = document.createElement("div")
+    
+    // Check if the round is more than 5 and show the message if you win or lose 
     if(round > 5){
-        if(humanScore > computerScore){
-            console.log("Human score" ,humanScore, "Computer Score", computerScore, "You win !")
+        if(humanScore === 5 || computerScore === 5){
+            FinalScore.textContent = `Human Score: ${humanScore}, Computer Score: ${computerScore}. You win the game congratulation !`
+            document.querySelector("button").disabled
         }else if(computerScore > humanScore){
-            console.log("Human score" ,humanScore, "Computer Score", computerScore, "Computer win !")
+        FinalScore.textContent = `Human Score: ${humanScore}, Computer Score: ${computerScore}. You lose the game better luck next time !`
+            document.querySelector("button").disabled
         }else{
-            console.log("Human score" ,humanScore, "Computer Score",computerScore, "It's a draw")
+            FinalScore.textContent = `Human Score: ${humanScore}, Computer Score: ${computerScore}. It's a draw nobody lose`
+            document.querySelector("button").disabled
         }
-        return
-    }
-
+        return 
+    }    
+    
     // Steps 4 : Logic to play a single round
 
-    //Create function PlayRound
-    //Define two parameters for PlayRound humanChoice and computerChoice
-    function PlayRound(humanChoice, computerChoice){
-    const btnRock = document.querySelector(".Rock");
-    const btnPaper = document.querySelector(".Paper");
-    const btnScissors = document.querySelector(".Scissors");
-
-
-    btnRock.addEventListener("click", () => PlayRound("rock"))
-    btnPaper.addEventListener("click", () => PlayRound("paper"))
-    btnScissors.addEventListener("click", () => PlayRound("scissors"))
-
-
-    //Show the result of human choice into the console
-    console.log("Human choice:",humanChoice);
-    // Show the result of Computer Choice in the console.
-    console.log("Computer choice:",computerSelection)
-    //If humanChoice choose different of ComputerChoice then in function of the choice loose or win the round and increment or decrement the score of the winner and show the log on the console
-    if(humanChoice === "paper" && computerChoice === "scissors" || humanChoice === "rock" && computerChoice === "paper" || humanChoice === "scissors" && computerChoice === "rock"){
-        ++computerScore;
-        console.log(`You lose, ${computerChoice} beat ${humanChoice}`);
-    }else if(humanChoice === computerChoice){
-        console.log(`It's a draw you both choose ${humanChoice, computerChoice}`);
-    }else{
-        ++humanScore;
-        console.log(`You win ! ${humanChoice} beat ${computerChoice}`);
-    }
-
-    // return the value of human choice and computer choice
-    return humanChoice && computerChoice;
-}
-    // Call the function GetComputerChoice to replay a round
-    const computerSelection = GetComputerChoice();
-    //Play the round and update the score
-    PlayRound(computerSelection);
     // Call playGame for the next round
-    // PlayGame(round + 1);
+    PlayGame(round + 1);
+
 
 
 }
+
+const btnRock = document.querySelector(".Rock");
+const btnPaper = document.querySelector(".Paper");
+const btnScissors = document.querySelector(".Scissors");
+const container = document.querySelector(".rps-main")
+const containerScore = document.querySelector(".rps-score")
+
+btnRock.addEventListener("click", () => PlayRound("Rock"))
+btnPaper.addEventListener("click", () => PlayRound("Paper"))
+btnScissors.addEventListener("click", () => PlayRound("Scissors"))
 
 // Start the game with the first round
 PlayGame(1);
