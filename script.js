@@ -38,9 +38,6 @@ let computerScore = 0;
 //Create function PlayGame
 function PlayGame(round = 1){
 
-
-
-
     //Check if the round is more than 5 and show the message if you win or lose 
     if(round > 5){
         if(humanScore > computerScore){
@@ -53,31 +50,25 @@ function PlayGame(round = 1){
         return
     }
 
+    // Steps 4 : Logic to play a single round
 
-
-// Steps 4 : Logic to play a single round
-
-//Create function PlayRound
-//Define two parameters for PlayRound humanChoice and computerChoice
-function PlayRound(humanChoice, computerChoice){
+    //Create function PlayRound
+    //Define two parameters for PlayRound humanChoice and computerChoice
+    function PlayRound(humanChoice, computerChoice){
     const btnRock = document.querySelector(".Rock");
     const btnPaper = document.querySelector(".Paper");
     const btnScissors = document.querySelector(".Scissors");
 
 
-    btnRock.addEventListener("click", () => PlayRound("Rock"))
-    btnPaper.addEventListener("click", () => PlayRound("Paper"))
-    btnScissors.addEventListener("click", () => PlayRound("Scissors"))
+    btnRock.addEventListener("click", () => PlayRound("rock"))
+    btnPaper.addEventListener("click", () => PlayRound("paper"))
+    btnScissors.addEventListener("click", () => PlayRound("scissors"))
 
 
-    //HumanChoice need to be case insensitive example "RoCk", "RocK", ROCK, "rock"
-    humanChoice = humanChoice;
     //Show the result of human choice into the console
     console.log("Human choice:",humanChoice);
-    //Computer choice result become lowercase
-    computerChoice = computerChoice;
     // Show the result of Computer Choice in the console.
-    console.log("Computer choice:",computerChoice)
+    console.log("Computer choice:",computerSelection)
     //If humanChoice choose different of ComputerChoice then in function of the choice loose or win the round and increment or decrement the score of the winner and show the log on the console
     if(humanChoice === "paper" && computerChoice === "scissors" || humanChoice === "rock" && computerChoice === "paper" || humanChoice === "scissors" && computerChoice === "rock"){
         ++computerScore;
@@ -92,7 +83,6 @@ function PlayRound(humanChoice, computerChoice){
     // return the value of human choice and computer choice
     return humanChoice && computerChoice;
 }
-
     // Call the function GetComputerChoice to replay a round
     const computerSelection = GetComputerChoice();
     //Play the round and update the score
