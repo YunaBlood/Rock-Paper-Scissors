@@ -26,29 +26,6 @@
     // Call the function 
     // GetComputerChoice()
 
-//Steps 2 : Human Choice
-
-//Create function GetHumanChoice
-function GetHumanChoice(){
-    //Create variable userChoice with prompt that ask the user it's choice between the 3
-    let userChoice = prompt("Rock, Paper, Scissors", "Rock")
-
-    //if userChoice value is undefined null or empty string then return function and reprompt the user for choice
-    if(userChoice === undefined || userChoice === null || userChoice === ""){
-        alert("Please input one the three choice : Rock, Paper, Scissors ")
-        return GetHumanChoice();
-    }
-    //if userChoice is not "rock" "paper" or "scissors" then alert("Please input one of the three choice") and return and recall the function to restart the choice
-    if(!(userChoice.toLowerCase() === "rock" || userChoice.toLowerCase() === "paper" || userChoice.toLowerCase() === "scissors")) {
-        alert("Please input one of the three choice : Rock, Paper, Scissors ");
-        return GetHumanChoice();
-    }
-        
-    //return the variable userChoice
-    return userChoice;
-}
-
-
 // Steps 3 : Declare player score
 
 //Create global scope variable HumanScore and initialize value to 0
@@ -83,12 +60,22 @@ function PlayGame(round = 1){
 //Create function PlayRound
 //Define two parameters for PlayRound humanChoice and computerChoice
 function PlayRound(humanChoice, computerChoice){
+    const btnRock = document.querySelector(".Rock");
+    const btnPaper = document.querySelector(".Paper");
+    const btnScissors = document.querySelector(".Scissors");
+
+
+    btnRock.addEventListener("click", () => PlayRound("Rock"))
+    btnPaper.addEventListener("click", () => PlayRound("Paper"))
+    btnScissors.addEventListener("click", () => PlayRound("Scissors"))
+
+
     //HumanChoice need to be case insensitive example "RoCk", "RocK", ROCK, "rock"
-    humanChoice = humanChoice.toLowerCase();
+    humanChoice = humanChoice;
     //Show the result of human choice into the console
     console.log("Human choice:",humanChoice);
     //Computer choice result become lowercase
-    computerChoice = computerChoice.toLowerCase();
+    computerChoice = computerChoice;
     // Show the result of Computer Choice in the console.
     console.log("Computer choice:",computerChoice)
     //If humanChoice choose different of ComputerChoice then in function of the choice loose or win the round and increment or decrement the score of the winner and show the log on the console
@@ -107,13 +94,11 @@ function PlayRound(humanChoice, computerChoice){
 }
 
     // Call the function GetComputerChoice to replay a round
-    const humanSelection = GetHumanChoice();
-    // Call the function GetComputerChoice to replay a round
     const computerSelection = GetComputerChoice();
     //Play the round and update the score
-    PlayRound(humanSelection,computerSelection);
+    PlayRound(computerSelection);
     // Call playGame for the next round
-    PlayGame(round + 1);
+    // PlayGame(round + 1);
 
 
 }
