@@ -36,63 +36,74 @@ function PlayRound(humanChoice, computerChoice){
     const computerSelection = GetComputerChoice();
     let resultMessage
 
-    const gameResult = document.querySelector(".game-result")
+    const roundResult = document.querySelector(".round-result")
     
     if(humanChoice === "Paper" && computerSelection === "Scissors" || humanChoice === "Rock" && computerSelection === "Paper" || humanChoice === "Scissors" && computerSelection === "Rock"){
         ++computerScore;
-        console.log("Scores before increment:", "computer:",computerScore,"human", humanScore);
         resultMessage = (`You lose, ${computerSelection} beat ${humanChoice}`);
     }else if(humanChoice === computerSelection){
-        resultMessage = (`It's a draw you both choose ${humanChoice, computerSelection}`);
+        resultMessage = (`It's a draw you both choose ${humanChoice}`);
     }else{
         ++humanScore;
-        console.log("Scores before increment:", "computer:",computerScore,"human", humanScore);
         resultMessage = (`You win ! ${humanChoice} beat ${computerSelection}`);
     }
 
+    let contentResult;
+    const gameResult = document.querySelector(".game-result")
+    const resetButton = document.querySelector(".reset");
+    //Reset the game
+    resetButton.addEventListener("click", () => resetGame());
+    
     //Update the display with the message and score
-    gameResult.textContent = `${resultMessage}`
-
+    roundResult.textContent = `${resultMessage}`;
     const gameHumanScore = document.querySelector(".human-score")
     const gameComputerScore = document.querySelector(".computer-score")
-
     gameHumanScore.textContent =`Human score: ${humanScore}`
     gameComputerScore.textContent =`computerScore: ${computerScore}`
+
+    if(humanScore < computerScore){
+        gameHumanScore.setAttribute("style", "color:red")
+        gameComputerScore.setAttribute("style", "color:green")
+    }else{
+        gameHumanScore.setAttribute("style", "color:green")
+        gameComputerScore.setAttribute("style", "color:red")
+    }
+    
+
+    if(humanScore === 5){
+        contentResult = (`Human Score: ${humanScore}, Computer Score: ${computerScore}. You win the game congratulation !`);
+        disableButton();
+        gameResult.setAttribute("style", "color:green" )
+        gameResult.textContent = `${contentResult}`;
+        return;
+    }else if(computerScore === 5){
+        contentResult = (`Human Score: ${humanScore}, Computer Score: ${computerScore}. You lose the game better luck next time !`);
+        disableButton();
+        gameResult.setAttribute("style", "color:red" )
+        gameResult.textContent = `${contentResult}`;
+        return;
+    }
+
+    function resetGame(){
+        humanScore = 0
+        computerScore = 0
+        gameHumanScore.textContent =`Human score: ${humanScore}`
+        gameComputerScore.textContent =`computerScore: ${computerScore}`
+        gameResult.textContent = "";
+        roundResult.textContent ="";
+        const buttons = document.querySelectorAll(".Rock, .Paper , .Scissors")
+        buttons.forEach(button => button.disabled = false)
+    }
+
+
+    function disableButton(){
+        const buttons = document.querySelectorAll(".Rock, .Paper , .Scissors")
+        buttons.forEach(button => button.disabled = true)
+    }
+
     
     // return the value of human choice and computer choice
     return humanChoice && computerChoice;
-}
-// Steps 5 : Write the logic to play the entire game
-
-//Create function PlayGame
-function PlayGame(round = 1){
-    
-    
-    
-    const FinalScore = document.createElement("div")
-    
-    // Check if the round is more than 5 and show the message if you win or lose 
-    if(round > 5){
-        if(humanScore === 5 || computerScore === 5){
-            FinalScore.textContent = `Human Score: ${humanScore}, Computer Score: ${computerScore}. You win the game congratulation !`
-            document.querySelector("button").disabled
-        }else if(computerScore > humanScore){
-        FinalScore.textContent = `Human Score: ${humanScore}, Computer Score: ${computerScore}. You lose the game better luck next time !`
-            document.querySelector("button").disabled
-        }else{
-            FinalScore.textContent = `Human Score: ${humanScore}, Computer Score: ${computerScore}. It's a draw nobody lose`
-            document.querySelector("button").disabled
-        }
-        return 
-    }    
-    
-    // Steps 4 : Logic to play a single round
-
-    // Call playGame for the next round
-    PlayGame(round + 1);
-
-
-
 }
 
 const btnRock = document.querySelector(".Rock");
@@ -101,10 +112,7 @@ const btnScissors = document.querySelector(".Scissors");
 const container = document.querySelector(".rps-main")
 const containerScore = document.querySelector(".rps-score")
 
+
 btnRock.addEventListener("click", () => PlayRound("Rock"))
 btnPaper.addEventListener("click", () => PlayRound("Paper"))
 btnScissors.addEventListener("click", () => PlayRound("Scissors"))
-
-// Start the game with the first round
-PlayGame(1);
-
