@@ -62,24 +62,24 @@ function PlayRound(humanChoice, computerChoice){
     gameComputerScore.textContent =`computerScore: ${computerScore}`
 
     if(humanScore < computerScore){
-        gameHumanScore.setAttribute("style", "color:red")
-        gameComputerScore.setAttribute("style", "color:green")
+        gameHumanScore.setAttribute("style", "color:red; font-size:25px; text-align:center; margin-bottom:10px; font-weight:bold")
+        gameComputerScore.setAttribute("style", "color:green; font-size:25px; text-align:center; font-weight:bold")
     }else{
-        gameHumanScore.setAttribute("style", "color:green")
-        gameComputerScore.setAttribute("style", "color:red")
+        gameHumanScore.setAttribute("style", "color:green; font-size:25px; text-align:center; margin-bottom:10px; font-weight:bold")
+        gameComputerScore.setAttribute("style", "color:red; font-size:25px; text-align:center; font-weight:bold")
     }
     
 
     if(humanScore === 5){
         contentResult = (`Human Score: ${humanScore}, Computer Score: ${computerScore}. You win the game congratulation !`);
         disableButton();
-        gameResult.setAttribute("style", "color:green" )
+        gameResult.setAttribute("style", "color:green; font-size:30px; text-align:center; font-weight:bold" )
         gameResult.textContent = `${contentResult}`;
         return;
     }else if(computerScore === 5){
         contentResult = (`Human Score: ${humanScore}, Computer Score: ${computerScore}. You lose the game better luck next time !`);
         disableButton();
-        gameResult.setAttribute("style", "color:red" )
+        gameResult.setAttribute("style", "color:red; font-size:30px; text-align:center; font-weight:bold" )
         gameResult.textContent = `${contentResult}`;
         return;
     }
