@@ -36,6 +36,7 @@ main{
     font-size:60px;
     color: blue;
     margin: 20px;
+    font-weight: bold;
 }
 
 .buttonDiv, .divReset{
